@@ -114,7 +114,7 @@ Capabilities:
         # prior releases.
         # Prior to enabling V1.4.3 channel capabilities, ensure that all
         # orderers and peers on a channel are at v1.4.3 or later.
-        V1_4_4: true
+        V1_4_2: true
         # V1.3 for Channel enables the new non-backwards compatible
         # features and fixes of fabric v1.3
         V1_3: false
@@ -142,7 +142,7 @@ Capabilities:
     Application: &ApplicationCapabilities
         # V1.4.2 for Application enables the new non-backwards compatible
         # features and fixes of fabric v1.4.2.
-        V1_4_4: true
+        V1_4_2: true
         # V1.3 for Application enables the new non-backwards compatible
         # features and fixes of fabric v1.3.
         V1_3: false
@@ -254,6 +254,7 @@ Channel: &ChannelDefaults
 Profiles:
 
     TwoOrgsOrdererGenesis:
+        <<: *ChannelDefaults
         Orderer:
             <<: *OrdererDefaults
             Organizations:
@@ -267,10 +268,11 @@ Profiles:
                     - *Org2
     TwoOrgsChannel:
         Consortium: SampleConsortium
+        <<: *ChannelDefaults
         Application:
             <<: *ApplicationDefaults
             Organizations:
                 - *Org1
                 - *Org2
-        Capabilities:
+            Capabilities:
                 <<: *ApplicationCapabilities
